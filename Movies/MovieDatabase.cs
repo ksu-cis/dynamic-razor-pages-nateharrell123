@@ -17,7 +17,7 @@ namespace Movies
         /// <summary>
         /// Gets the possible MPAARatings
         /// </summary>
-        public static string[] MPAARatings
+        public static string[] MPAARating
         {
             get => new string[]
             {
@@ -55,6 +55,28 @@ namespace Movies
             foreach (Movie movie in All)
             {
                 if (movie.Title != null && movie.Title.Contains(terms, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    results.Add(movie);
+                }
+            }
+            return results;
+        }
+
+        /// <summary>
+        /// Filters the provided collection of movies
+        /// </summary>
+        /// <param name="movies">The collection of movies to filter</param>
+        /// <param name="ratings">The ratings to include</param>
+        /// <returns>A collection containing only movies that match the filter</returns>
+        public static IEnumerable<Movie> FilterByMPAARating(IEnumerable<Movie> movies, IEnumerable<string> ratings)
+        {
+            // If no filter is specified, just return the provided collection
+            if (ratings == null || ratings.Count() == 0) return movies;
+            // Filter the supplied collection of movies
+            List<Movie> results = new List<Movie>();
+            foreach (Movie movie in movies)
+            {
+                if (movie.MPAARating != null && ratings.Contains(movie.MPAARating))
                 {
                     results.Add(movie);
                 }

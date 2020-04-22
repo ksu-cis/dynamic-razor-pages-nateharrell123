@@ -28,9 +28,10 @@ namespace Movies.Pages
         /// </summary>
         public void OnGet()
         {
-            MPAARatings = Request.Query["MPAARatings"];
             SearchTerms = Request.Query["SearchTerms"];
+            MPAARatings = Request.Query["MPAARatings"];
             Movies = MovieDatabase.Search(SearchTerms);
+            Movies = MovieDatabase.FilterByMPAARating(Movies, MPAARatings);
         }
     }
 }
