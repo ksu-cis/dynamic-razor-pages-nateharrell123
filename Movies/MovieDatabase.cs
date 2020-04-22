@@ -15,6 +15,21 @@ namespace Movies
         private static List<Movie> movies = new List<Movie>();
 
         /// <summary>
+        /// Gets the possible MPAARatings
+        /// </summary>
+        public static string[] MPAARatings
+        {
+            get => new string[]
+            {
+            "G",
+            "PG",
+            "PG-13",
+            "R",
+            "NC-17"
+            };
+        }
+
+        /// <summary>
         /// Loads the movie database from the JSON file
         /// </summary>
         static MovieDatabase() {
@@ -39,12 +54,12 @@ namespace Movies
             // return each movie in the database containing the terms substring
             foreach (Movie movie in All)
             {
-                if (movie.Title.Contains(terms, StringComparison.InvariantCultureIgnoreCase))
+                if (movie.Title != null && movie.Title.Contains(terms, StringComparison.InvariantCultureIgnoreCase))
                 {
                     results.Add(movie);
                 }
             }
-
+            return results;
         }
 
         /// <summary>

@@ -5,16 +5,24 @@
 }
 
 <!--From assignment-->
-<form>
-    <input type="text" name="SearchTerms" value="@Model.SearchTerms"/>
-    <input type="submit" value="Search">
-</form>
+    <form>
+        <input type="text" name="SearchTerms" value="@Model.SearchTerms" />
+        <input type="submit" value="Search">
+
+        @foreach (String rating in MovieDatabase.MPAARatings)
+        {
+            <label>
+                <input type="checkbox" name="MPAARating" value="@rating" checked="@Model.MPAARatings.Contains(rating)" />
+                @rating
+            </label>
+        }
+    </form>
 
 <h1>Movie Results</h1>
 
 <!--Separating movie based on title, mpaa rating and genre-->
 <ul class="movie-list">
-    @foreach (Movie movie in MovieDatabase.All)
+    @foreach (Movie movie in @Model.Movies)
     {
         <li>
             <div class="details">
@@ -22,7 +30,6 @@
                 <div class="mpaa">@movie.MPAARating</div>
                 <div class="genre">@movie.MajorGenre</div>
             </div>
-
             <div class="ratings">
                 @if (movie.IMDBRating != null)
                 {
