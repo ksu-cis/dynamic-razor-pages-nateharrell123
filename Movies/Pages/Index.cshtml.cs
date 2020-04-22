@@ -9,10 +9,10 @@ namespace Movies.Pages
 {
     public class IndexModel : PageModel
     {
-
+        public string SearchTerms { get; set; }
         public void OnGet()
         {
-
+            String terms = Request.Query["SearchTerms"];
         }
     }
 }
