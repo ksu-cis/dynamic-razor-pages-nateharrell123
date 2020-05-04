@@ -28,10 +28,32 @@ namespace Movies.Pages
         /// </summary>
         public void OnGet()
         {
+            /*
             SearchTerms = Request.Query["SearchTerms"];
             MPAARatings = Request.Query["MPAARatings"];
             Movies = MovieDatabase.Search(SearchTerms);
             Movies = MovieDatabase.FilterByMPAARating(Movies, MPAARatings);
+            */
+
+            // Search movie titles for the search terms.
+            Movies = MovieDatabase.All;
+            if(SearchTerms != null)
+            {
+                Movies = Movies.Where(movie => 
+                movie.Title != null && 
+                movie.Title.Contains(SearchTerms, StringComparison.CurrentCultureIgnoreCase));
+            }
+
+            // Filter by MPAA rating
+            if(MPAARatings != null && MPAARatings.Length != 0)
+            {
+                // Take list of movies and shorten it by 
+                Movies = Movies.Where(movie => 
+                movie.MPAARating != null && MPAARatings.Contains(movie.MPAARating));
+            }
+
+            
+
         }
     }
 }
