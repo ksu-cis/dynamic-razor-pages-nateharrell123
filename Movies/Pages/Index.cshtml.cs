@@ -51,9 +51,6 @@ namespace Movies.Pages
                 Movies = Movies.Where(movie => 
                 movie.MPAARating != null && MPAARatings.Contains(movie.MPAARating));
             }
-
-            
-
         }
     }
 }
